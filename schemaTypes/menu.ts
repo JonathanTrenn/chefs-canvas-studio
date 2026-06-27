@@ -54,6 +54,57 @@ export const menu = defineType({
     }),
 
     defineField({
+      name: "courseLabelOverrides",
+      title: "Course Label Overrides",
+      type: "array",
+      description: "Optional. Override the default English section labels with cuisine-appropriate terms. Example: set 'pasta' to 'Primi' for an Italian restaurant.",
+      of: [
+        defineField({
+          name: "courseLabelOverride",
+          title: "Course Label Override",
+          type: "object",
+          fields: [
+            defineField({
+              name: "courseType",
+              title: "Course Type",
+              type: "string",
+              description: "The course type value to override.",
+              options: {
+                list: [
+                  { title: "Appetizer", value: "appetizer" },
+                  { title: "Soup", value: "soup" },
+                  { title: "Salad", value: "salad" },
+                  { title: "Pasta / Noodles / Rice", value: "pasta" },
+                  { title: "Main Courses", value: "main" },
+                  { title: "Seafood", value: "seafood" },
+                  { title: "Meats", value: "meat" },
+                  { title: "Vegetarian", value: "vegetarian" },
+                  { title: "Sides", value: "side" },
+                  { title: "Dessert", value: "dessert" },
+                  { title: "Beverages", value: "beverage" },
+                  { title: "Other", value: "other" },
+                ],
+                layout: "radio",
+              },
+            }),
+            defineField({
+              name: "label",
+              title: "Display Label",
+              type: "string",
+              description: "The label to display on the menu page. Example: Primi",
+            }),
+          ],
+          preview: {
+            select: {
+              title: "label",
+              subtitle: "courseType",
+            },
+          },
+        }),
+      ],
+    }),
+
+    defineField({
       name: "isPublished",
       title: "Published",
       type: "boolean",

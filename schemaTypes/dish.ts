@@ -70,7 +70,6 @@ defineField({
   title: 'The Story',
   type: 'array',
   of: [{ type: 'block' }],
-  validation: (rule) => rule.required(),
 }),
 defineField({
   name: 'features',
