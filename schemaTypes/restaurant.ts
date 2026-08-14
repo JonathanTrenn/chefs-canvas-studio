@@ -4,17 +4,27 @@ export const restaurant = defineType({
   name: "restaurant",
   title: "Restaurant",
   type: "document",
+  groups: [
+    { name: "essentials", title: "Essentials", default: true },
+    { name: "contact", title: "Contact" },
+    { name: "ctas", title: "CTAs" },
+    { name: "discoverability", title: "Discoverability" },
+    { name: "branding", title: "Branding" },
+  ],
   fields: [
+    // ── Essentials ─────────────────────────────────────
     defineField({
       name: "name",
       title: "Restaurant Name",
       type: "string",
+      group: "essentials",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
+      group: "essentials",
       options: { source: "name", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
@@ -22,21 +32,22 @@ export const restaurant = defineType({
       name: "tagline",
       title: "Tagline",
       type: "string",
+      group: "essentials",
       description: "Example: TUSCAN • CHIANTI • RISOTTO",
     }),
-
     defineField({
       name: "shortDescription",
       title: "Short Description",
       type: "text",
+      group: "essentials",
       rows: 3,
       description: "1–2 sentences describing the restaurant. Feeds schema description.",
     }),
-
     defineField({
       name: "cuisineType",
       title: "Cuisine Type",
       type: "array",
+      group: "essentials",
       of: [{ type: "string" }],
       description: "Select all cuisine types that apply.",
       options: {
@@ -63,11 +74,11 @@ export const restaurant = defineType({
         layout: "grid",
       },
     }),
-
     defineField({
       name: "priceRange",
       title: "Price Range",
       type: "string",
+      group: "essentials",
       options: {
         list: [
           { title: "$", value: "$" },
@@ -78,53 +89,54 @@ export const restaurant = defineType({
         layout: "radio",
       },
     }),
-
     defineField({
       name: "logo",
       title: "Logo",
       type: "image",
+      group: "essentials",
       options: { hotspot: true },
     }),
-
     defineField({
       name: "primaryImage",
       title: "Primary Image",
       type: "image",
+      group: "essentials",
       options: { hotspot: true },
       description: "Main image for og:image and schema. Best if food or restaurant interior.",
     }),
 
-    // ── Contact & Location ──────────────────────────────
+    // ── Contact ────────────────────────────────────────
     defineField({
       name: "phone",
       title: "Phone",
       type: "string",
+      group: "contact",
       description: "Example: +1-555-000-0000",
     }),
-
     defineField({
       name: "publicEmail",
       title: "Public Email",
       type: "string",
+      group: "contact",
     }),
-
     defineField({
       name: "websiteUrl",
       title: "Website URL",
       type: "url",
+      group: "contact",
     }),
-
     defineField({
       name: "googleMapsUrl",
       title: "Google Maps URL",
       type: "url",
+      group: "contact",
       description: "Full Google Maps link for directions.",
     }),
-
     defineField({
       name: "address",
       title: "Address",
       type: "object",
+      group: "contact",
       fields: [
         defineField({ name: "street", title: "Street", type: "string" }),
         defineField({ name: "city", title: "City", type: "string" }),
@@ -134,131 +146,134 @@ export const restaurant = defineType({
       ],
     }),
 
-    // ── CTA Defaults ────────────────────────────────────
+    // ── CTAs ───────────────────────────────────────────
     defineField({
       name: "defaultReservationUrl",
       title: "Default Reservation URL",
       type: "url",
+      group: "ctas",
       description: "Used on dish pages when no dish-level CTA override exists.",
     }),
-
     defineField({
       name: "defaultOrderUrl",
       title: "Default Order URL",
       type: "url",
+      group: "ctas",
     }),
-
     defineField({
       name: "defaultDirectionsUrl",
       title: "Default Directions URL",
       type: "url",
+      group: "ctas",
     }),
-
     defineField({
       name: "defaultEmailSignupUrl",
       title: "Default Email Signup URL",
       type: "url",
+      group: "ctas",
     }),
-
     defineField({
       name: "defaultPhoneCta",
       title: "Default Phone CTA",
       type: "string",
+      group: "ctas",
       description: "Example: tel:+15550000000",
     }),
 
-    // ── Structured Data ─────────────────────────────────
+    // ── Discoverability ────────────────────────────────
     defineField({
       name: "servesCuisine",
       title: "Serves Cuisine",
       type: "string",
+      group: "discoverability",
       description: "Plain text for schema servesCuisine. Example: Italian, Tuscan",
     }),
-
     defineField({
       name: "menuUrl",
       title: "Menu URL",
       type: "url",
+      group: "discoverability",
       description: "Canonical URL of the menu page. Feeds schema hasMenu.",
     }),
-
     defineField({
       name: "reservationUrl",
       title: "Reservation URL",
       type: "url",
+      group: "discoverability",
       description: "Feeds schema reservations.",
     }),
-
     defineField({
       name: "sameAsLinks",
       title: "SameAs Links",
       type: "array",
+      group: "discoverability",
       of: [{ type: "url" }],
       description: "Social profiles and listing URLs. Example: Instagram, Google Business, Yelp.",
     }),
-
     defineField({
       name: "schemaEnabled",
       title: "Schema Enabled",
       type: "boolean",
+      group: "discoverability",
       initialValue: true,
       description: "Toggle Restaurant structured data output on or off.",
     }),
 
-    // ── Branding ────────────────────────────────────────
+    // ── Branding ───────────────────────────────────────
     defineField({
       name: "brandPrimaryColor",
       title: "Brand Primary Color",
       type: "string",
+      group: "branding",
       description: "Hex value. Example: #7B2D1E",
     }),
-
     defineField({
       name: "brandSecondaryColor",
       title: "Brand Secondary Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "accentColor",
       title: "Accent Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "backgroundColor",
       title: "Background Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "textPrimaryColor",
       title: "Text Primary Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "ctaButtonColor",
       title: "CTA Button Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "ctaButtonTextColor",
       title: "CTA Button Text Color",
       type: "string",
+      group: "branding",
       description: "Hex value.",
     }),
-
     defineField({
       name: "headingFont",
       title: "Heading Font",
       type: "string",
+      group: "branding",
       description: "Must be from the approved font library. Example: Playfair Display",
       options: {
         list: [
@@ -278,11 +293,11 @@ export const restaurant = defineType({
         layout: "radio",
       },
     }),
-
     defineField({
       name: "bodyFont",
       title: "Body Font",
       type: "string",
+      group: "branding",
       options: {
         list: [
           { title: "Source Sans 3", value: "Source Sans 3" },
@@ -297,11 +312,11 @@ export const restaurant = defineType({
         layout: "radio",
       },
     }),
-
     defineField({
       name: "themeStyle",
       title: "Theme Style",
       type: "string",
+      group: "branding",
       options: {
         list: [
           { title: "Rustic", value: "rustic" },
@@ -318,11 +333,11 @@ export const restaurant = defineType({
         layout: "radio",
       },
     }),
-
     defineField({
       name: "lightDarkPreference",
       title: "Light / Dark Preference",
       type: "string",
+      group: "branding",
       options: {
         list: [
           { title: "Light", value: "light" },
