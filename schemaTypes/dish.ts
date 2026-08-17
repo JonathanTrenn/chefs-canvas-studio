@@ -387,6 +387,18 @@ export default defineType({
       },
     }),
     defineField({
+      name: "culinaryRegion",
+      title: "Culinary Region(s)",
+      type: "array",
+      group: "discoverability",
+      of: [{ type: "string" }],
+      description:
+        "The cultural or geographic origin(s) of this dish. Type a region and press Enter to add it; type another to add more. Examples: Tuscany, Emilia-Romagna, Oaxaca, Sichuan Province, Amhara. Leave blank for dishes without a specific regional origin.",
+      options: {
+        layout: "tags",
+      },
+    }),
+    defineField({
       name: 'metaDescription',
       title: 'Meta Description',
       type: 'text',
