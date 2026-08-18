@@ -41,13 +41,33 @@ export default defineType({
       to: [{ type: 'restaurant' }],
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'menu',
-      title: 'Menu',
-      type: 'reference',
-      group: 'essentials',
-      to: [{ type: 'menu' }],
-      description: 'The menu this dish belongs to.',
+      defineField({
+      name: "menu",
+      title: "Menu(s)",
+      type: "array",
+      group: "essentials",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "menu" }],
+          options: {
+            filter: ({ document }) => {
+              const dishDoc = document as { restaurant?: { _ref?: string } };
+              const restaurantId = dishDoc?.restaurant?._ref;
+              if (!restaurantId) {
+                return { filter: "" };
+              }
+              return {
+                filter: "restaurant._ref == $restaurantId",
+                params: { restaurantId },
+              };
+            },
+          },
+        },
+      ],
+      description:
+        "Select every menu this dish appears on. The picker only shows menus belonging to the dish's restaurant, so set the Restaurant field above first.",
+      validation: (rule) => rule.min(1).error("A dish must appear on at least one menu."),
     }),
     defineField({
       name: 'price',
