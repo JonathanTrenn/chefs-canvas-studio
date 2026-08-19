@@ -241,6 +241,15 @@ export default defineType({
       description:
         'Optional but highly valuable. Full text transcript of what is said in the video. Helps AI systems understand video content deeply. Wistia can auto-generate this on Business plan.',
     }),
+        defineField({
+      name: 'schemaVideoEnabled',
+      title: 'Publish Video to Structured Data',
+      type: 'boolean',
+      group: 'media',
+      initialValue: false,
+      description:
+        'Toggle on to include this dish\'s video in the JSON-LD structured data output. Off by default — turn on only when the video is production-ready and all video fields (title, description, upload date, duration) are complete.',
+    }),
     // ── CTA ────────────────────────────────────────────
     defineField({
       name: 'ctaTitle',
@@ -324,7 +333,24 @@ export default defineType({
       group: 'review',
       description: 'Example: — Google review, Jan 2026 / — Guest note from date-night service',
     }),
-
+    defineField({
+      name: 'quoteApprovedSchema',
+      title: 'Quote Approved for Structured Data',
+      type: 'boolean',
+      group: 'review',
+      initialValue: false,
+      description:
+        'First gate for review schema output. Toggle on only when the guest has explicitly approved this quote for public structured data use. Required in addition to the schema-level toggle below.',
+    }),
+    defineField({
+      name: 'schemaReviewEnabled',
+      title: 'Publish Review to Structured Data',
+      type: 'boolean',
+      group: 'review',
+      initialValue: false,
+      description:
+        'Second gate for review schema output. Toggle on to include this quote as a Review in the JSON-LD structured data output. Off by default — requires both this toggle and the quote-approved toggle above to be on.',
+    }),
     // ── Discoverability ────────────────────────────────
     defineField({
       name: 'courseType',
@@ -464,7 +490,15 @@ export default defineType({
       description:
         'Optional. Used for search engine preview text and og:description. Keep under 160 characters.',
     }),
-
+    defineField({
+      name: 'schemaMenuitemEnabled',
+      title: 'Publish MenuItem to Structured Data',
+      type: 'boolean',
+      group: 'discoverability',
+      initialValue: true,
+      description:
+        'Toggle on to include this dish as a MenuItem in the JSON-LD structured data output. ON by default — turn off only if you specifically need to suppress this dish from structured data output while keeping the page visible.',
+    }),
     // ── Workflow ───────────────────────────────────────
     defineField({
       name: 'contentStatus',
