@@ -203,7 +203,44 @@ export default defineType({
       description:
         'Thumbnail image for the video. Required by Google for valid VideoObject schema.',
     }),
-
+    defineField({
+      name: 'videoUploadDate',
+      title: 'Video Upload Date',
+      type: 'date',
+      group: 'media',
+      description:
+        'The date the video was uploaded to Wistia. Required by Google for valid VideoObject schema. Only needed if a Wistia Video ID is entered above.',
+      options: {
+        dateFormat: 'YYYY-MM-DD',
+      },
+    }),
+    defineField({
+      name: 'videoDurationMinutes',
+      title: 'Video Duration — Minutes',
+      type: 'number',
+      group: 'media',
+      description:
+        'Minutes portion of video length (e.g. 2 for a 2:30 video). Combined with seconds field to produce ISO 8601 duration. Required by Google for valid VideoObject schema.',
+      validation: (rule) => rule.min(0).max(999).integer(),
+    }),
+    defineField({
+      name: 'videoDurationSeconds',
+      title: 'Video Duration — Seconds',
+      type: 'number',
+      group: 'media',
+      description:
+        'Seconds portion of video length (e.g. 30 for a 2:30 video). Combined with minutes field to produce ISO 8601 duration. Required by Google for valid VideoObject schema.',
+      validation: (rule) => rule.min(0).max(59).integer(),
+    }),
+    defineField({
+      name: 'videoTranscript',
+      title: 'Video Transcript',
+      type: 'text',
+      group: 'media',
+      rows: 10,
+      description:
+        'Optional but highly valuable. Full text transcript of what is said in the video. Helps AI systems understand video content deeply. Wistia can auto-generate this on Business plan.',
+    }),
     // ── CTA ────────────────────────────────────────────
     defineField({
       name: 'ctaTitle',
