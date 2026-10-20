@@ -272,7 +272,7 @@ export const restaurant = defineType({
     defineField({
       name: "headingFont",
       title: "Heading Font",
-      type: "color",
+      type: "string",
       group: "branding",
       description: "Must be from the approved font library. Example: Playfair Display",
       options: {
